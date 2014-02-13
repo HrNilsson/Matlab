@@ -3,7 +3,9 @@ function dist = HammingDist(G)
 s = size(G);
 dist = 0;
 for i = 1:s(1)
-    if sum(G(i,:)) < dist
+    if sum(G(i,:)) == 1
+        %The zero vector
+    elseif sum(G(i,:)) < dist
         dist = sum(G(i,:))
     elseif dist == 0 %First run goes here
         dist = sum(G(i,:))
