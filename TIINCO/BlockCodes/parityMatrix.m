@@ -16,5 +16,5 @@ switch nargin
     case 1
         P = G(:,1:s(2)-s(1));
 end
-H = [P' eye(length(P))];
+H = [eye(length(P)) P'];
 end
