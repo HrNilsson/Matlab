@@ -1,7 +1,8 @@
-function dist = HammingWeigth(G)
+function weigth = HammingWeigth(G)
 % Calculate the Hamming weigth of a vector.
+% weigth = HammingWeigth(G)
 s = size(G);
-dist = 0;
+weigth = 0;
 
 for i = 1:s(1)
     temp = 0;
@@ -13,10 +14,10 @@ for i = 1:s(1)
     
     if temp == 0
         %The zero vector
-    elseif temp < dist
-        dist = temp;
-    elseif dist == 0 %First run goes here
-        dist = temp;
+    elseif temp < weigth
+        weigth = temp;
+    elseif weigth == 0 %First run goes here
+        weigth = temp;
     end
 end
 
