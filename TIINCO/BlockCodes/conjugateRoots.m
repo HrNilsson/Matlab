@@ -1,19 +1,18 @@
 function b = conjugateRoots(root,m)
-syms x;
+% Returns all the conjugated roots, given one root.
+% b = conjugateRoots(root,m).
+% m depends on the GF(2^m).
 b = sym(zeros(m,1));
 b(1) = root;
 i = 1;
 b(i+1) = b(1)^(2^i);
-if degree(b(i+1)) > 2^m-2
-    b(i+1) = b(i+1)/x^(2^m-1);
-end
+b(i+1) = gfWrap(b(i+1),m);
+
 w1 = 1;
 while w1
     i = i+1;
     b(i+1) = b(1)^(2^i);
-    while degree(b(i+1)) > 2^m-2
-        b(i+1) = b(i+1)/x^(2^m-1);
-    end
+    b(i+1) = gfWrap(b(i+1),m);
     if b(i+1) == root
        w1 = 0;
     end
