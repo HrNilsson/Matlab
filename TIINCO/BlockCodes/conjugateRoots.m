@@ -2,7 +2,7 @@ function b = conjugateRoots(root,m)
 % Returns all the conjugated roots, given one root.
 % b = conjugateRoots(root,m).
 % m depends on the GF(2^m).
-b = sym(zeros(m,1));
+b = sym(zeros(1,m));
 b(1) = root;
 i = 1;
 b(i+1) = b(1)^(2^i);
@@ -17,5 +17,5 @@ while w1
        w1 = 0;
     end
 end
-b = b(1:end-1,:);
+b = b(:,1:end-1);
 end
