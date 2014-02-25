@@ -1,5 +1,8 @@
 function d = degree(eq)
-
+% Returns the maximum degree of the input equation.
+% d = degree(eq)
+%
+% Note: Only accepts an equation with elements with only one '^'.
 a = strtrim(strsplit(char(eq),'+'));
 d = 0;
 for i=1:length(a)

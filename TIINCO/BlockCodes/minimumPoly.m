@@ -3,7 +3,6 @@ function [minPol b] = minimumPoly(E,P,root)
 % exponential and polynomial form of the Galois Field, and one root.
 % [minPol b] = minimumPoly(E,P,root)
 % See gfPol2Table for E and P parameter.
-% root should be specified using the symbol 'a'.
 %
 % Note: 
 % root = 0 -> X     (Not supported)
