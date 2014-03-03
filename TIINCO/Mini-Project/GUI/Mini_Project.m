@@ -22,7 +22,7 @@ function varargout = Mini_Project(varargin)
 
 % Edit the above text to modify the response to help Mini_Project
 
-% Last Modified by GUIDE v2.5 27-Feb-2014 11:38:12
+% Last Modified by GUIDE v2.5 28-Feb-2014 10:19:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -51,6 +51,22 @@ function Mini_Project_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to Mini_Project (see VARARGIN)
+
+% GUIData handles initializion:
+n = 15; k = 7;
+handles.k = k;
+handles.n = n;
+handles.received = zeros(1,n);
+handles.buffer = zeros(1,n);
+handles.corrected = zeros(1,n);
+handles.syndrome = zeros(1,n-k);
+handles.message = zeros(1,k);
+handles.genPoly = char(0);
+handles.code = zeros(1,n-k);
+handles.error = zeros(1,n);
+% Txt field initialitazion:
+set(handles.txtN,'String', mat2str(handles.n));
+set(handles.txtK,'String', mat2str(handles.k));
 
 % Choose default command line output for Mini_Project
 handles.output = hObject;
@@ -174,6 +190,10 @@ function txtMessage_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of txtMessage as text
 %        str2double(get(hObject,'String')) returns contents of txtMessage as a double
 
+handles.message = str2num(get(hObject,'String'));
+
+% Update handles structure
+guidata(hObject,handles);
 
 % --- Executes during object creation, after setting all properties.
 function txtMessage_CreateFcn(hObject, eventdata, handles)
@@ -196,7 +216,9 @@ function txtGenPol_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of txtGenPol as text
 %        str2double(get(hObject,'String')) returns contents of txtGenPol as a double
-
+handles.genPoly = sym((get(hObject,'String')));
+% Update handles structure
+guidata(hObject,handles);
 
 % --- Executes during object creation, after setting all properties.
 function txtGenPol_CreateFcn(hObject, eventdata, handles)
@@ -242,6 +264,12 @@ function txtError_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of txtError as text
 %        str2double(get(hObject,'String')) returns contents of txtError as a double
+handles.error = str2num(get(hObject,'String'));
+
+handles.received = mod(handles.error+handles.code,2);
+set(handles.txtReceived,'String', mat2str(handles.received));
+% Update handles structure
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -262,6 +290,11 @@ function btnGenMessage_Callback(hObject, eventdata, handles)
 % hObject    handle to btnGenMessage (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.message = randi([0 1],[1,handles.k]);
+set(handles.txtMessage,'String', mat2str(handles.message));
+
+% Update handles structure
+guidata(hObject,handles);
 
 
 % --- Executes on button press in btnGenPoly.
@@ -269,20 +302,35 @@ function btnGenPoly_Callback(hObject, eventdata, handles)
 % hObject    handle to btnGenPoly (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+syms X;
+handles.genPoly = 1 + X^4 + X^6 + X^7 + X^8;
+set(handles.txtGenPol,'String', char(handles.genPoly));
 
+% Update handles structure
+guidata(hObject,handles);
 
 % --- Executes on button press in btnGenCode.
 function btnGenCode_Callback(hObject, eventdata, handles)
 % hObject    handle to btnGenCode (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.code = cyclicEncode(handles.genPoly,handles.message);
 
+set(handles.txtCode,'String', mat2str(handles.code));
+% Update handles structure
+guidata(hObject,handles);
 
 % --- Executes on button press in btnGenError.
 function btnGenError_Callback(hObject, eventdata, handles)
 % hObject    handle to btnGenError (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+handles.error = randi([0 1],[1,handles.n]);
+set(handles.txtError,'String', mat2str(handles.error));
+handles.received = mod(handles.error+handles.code,2);
+set(handles.txtReceived,'String', mat2str(handles.received));
+% Update handles structure
+guidata(hObject,handles);
 
 
 % --- Executes on button press in btnRun.
@@ -290,6 +338,14 @@ function btnRun_Callback(hObject, eventdata, handles)
 % hObject    handle to btnRun (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+[ codeVector, errorVector, tag, bufferReg, syndromeReg ] = cyclicDecode( handles.received, handles.genPoly, handles.n, handles.k, 1);
+
+set(handles.txtBuffer,'String', mat2str(bufferReg));
+set(handles.txtCorrected,'String', mat2str(codeVector));
+set(handles.txtSyndrome,'String', mat2str(syndromeReg));
+
+% Update handles structure
+guidata(hObject,handles);
 
 
 % --- Executes on button press in btnReset.
@@ -304,3 +360,57 @@ function btnStep_Callback(hObject, eventdata, handles)
 % hObject    handle to btnStep (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+
+function txtN_Callback(hObject, eventdata, handles)
+% hObject    handle to txtN (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of txtN as text
+%        str2double(get(hObject,'String')) returns contents of txtN as a double
+handles.n = str2double(get(hObject,'String'));
+
+% Update handles structure
+guidata(hObject,handles);
+
+% --- Executes during object creation, after setting all properties.
+function txtN_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to txtN (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function txtK_Callback(hObject, eventdata, handles)
+% hObject    handle to txtK (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of txtK as text
+%        str2double(get(hObject,'String')) returns contents of txtK as a double
+
+handles.k = str2double(get(hObject,'String'));
+
+% Update handles structure
+guidata(hObject,handles);
+
+
+% --- Executes during object creation, after setting all properties.
+function txtK_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to txtK (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
