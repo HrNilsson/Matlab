@@ -25,9 +25,7 @@ end
  
 % Substitute all exponential forms with polynomial form and reduce:
 while degree(subs(minPol,X,1)) > m
-    for i=1:length(E)
-        minPol = subs(minPol,E,P);
-    end
+    minPol = subs(minPol,E,P);
     minPol = expand(minPol);
 end
 
