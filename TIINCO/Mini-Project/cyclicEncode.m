@@ -1,5 +1,5 @@
 function [ codeVector ] = cyclicEncode( genPol, messageVector )
-%cyclicEncode Encodes messageVector using a cyclcic generator polynomial
+%   cyclicEncode Encodes messageVector using a cyclcic generator polynomial
 %   genPol is a generator polynomial of sympolic variable X
 %   messageVector a is binary vector
 % 
