@@ -338,7 +338,7 @@ function btnRun_Callback(hObject, eventdata, handles)
 % hObject    handle to btnRun (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[ codeVector, errorVector, tag, bufferReg, syndromeReg ] = cyclicDecode( handles.received, handles.genPoly, handles.n, handles.k, 1);
+[ codeVector, errorVector, tag, bufferReg, syndromeReg ] = cyclicDecode( handles.received, handles.genPoly, handles.n, handles.k);
 
 set(handles.txtBuffer,'String', mat2str(bufferReg));
 set(handles.txtCorrected,'String', mat2str(codeVector));

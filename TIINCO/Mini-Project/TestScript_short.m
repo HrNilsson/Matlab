@@ -1,25 +1,30 @@
-function [ codeVector, errorVector, tag, bufferReg, syndromeReg ] = cyclicDecode( receiveVector, genPol, n, k)
-% Meggit Decoder
+% Test script
+clear; clc;
+n = 7; k = 4; r = n-k;
+syms x;
+genPol = 1 + x + x^3;
+genVec = pol2polvec(genPol)
+message = [0 1 0 1];
+codeWord = cyclicEncode(genPol,message)
+error = [0 0 0 1 0 0 0]
 
-r = degree(genPol);
-n1 = numel(receiveVector);
-k1 = n1-r;
-if(n1 ~= n || k1 ~= k)
-   error('The received vector and the generator polynomium does not correspond to the values of n and k'); 
-end
+[0     1     1;
+ 1     1     1;
+ 1     0     1]
 
-% Generator polynomium in vector form:
-genVec = pol2polvec(genPol);
+receiveVector = mod(codeWord + error,2)
 
-% 'Registers' initialization:
+H = cyclgen(n,genVec);
+
+Rx = polvec2pol(receiveVector);
+s8 = mod(receiveVector*H',2)
+
+syndromeReg = zeros(1,r);
 bufferReg = zeros(1,n);
 codeVector = zeros(1,n);
-errorVector = zeros(1,n);
-syndromeReg = zeros(1,r);
+errSyndTable = [1 0 1];
 errorDetected = 0;
-tag = 'Not set';
-
-errSyndTable = generateErrExpr(n, genPol);
+errorGated = 0;
 
 for i = 1:n*2
     % Output codeVector
@@ -30,6 +35,7 @@ for i = 1:n*2
 
     %Update syndrome register
     syndromeGate = syndromeReg(end);
+
     syndromeReg(end) = syndromeReg(end-1);
     for j = 2:r-1
         syndromeReg(r+1-j) = mod(syndromeReg(r-j) + syndromeGate*genVec(r-j),2);
@@ -42,14 +48,15 @@ for i = 1:n*2
         disp('less')
     end
     
-     for j = 1:n
-        if(errSyndTable(j,:) == syndromeReg)
+%     for j = 1:n
+        if(errSyndTable == syndromeReg)
             errorDetected = 1;
-            errorVector(i-(n+1)/2) = 1;
-            break;
-        end
+        else
             errorDetected = 0;
-     end
+        end
+%     end
+    
+    b = [receiveVector(n) syndromeReg syndromeGate]
 
     % Buffer register update
     bufferReg = circshift(bufferReg,[1 1]);
@@ -58,12 +65,5 @@ for i = 1:n*2
     % Receive vector update
     receiveVector = circshift(receiveVector,[1 1]);
     receiveVector(1) = 0;
-end
-
-if(isequal(syndromeReg,zeros(1,r)))
-    tag = 'Correctable';
-else
-    tag = 'Uncorrectable error';
-end
-
+    pause;
 end
