@@ -30,26 +30,25 @@ for i = 1:n*2
 
     %Update syndrome register
     syndromeGate = syndromeReg(end);
-    syndromeReg(end) = syndromeReg(end-1);
-    for j = 2:r-1
-        syndromeReg(r+1-j) = mod(syndromeReg(r-j) + syndromeGate*genVec(r-j),2);
+
+    for j = 1:r-1
+        syndromeReg(r+1-j) = mod(syndromeReg(r-j) + syndromeGate*genVec(r+1-j),2);
     end
     
     if(i > n)
         syndromeReg(1) = mod(receiveVector(n) + errorDetected + syndromeGate*genVec(1),2);
     else
         syndromeReg(1) = mod(receiveVector(n) + syndromeGate*genVec(1),2);
-        disp('less')
     end
     
-     for j = 1:n
-        if(errSyndTable(j,:) == syndromeReg)
+    for j = 1:n
+        if(isequal(errSyndTable(j,:),syndromeReg))
             errorDetected = 1;
-            errorVector(i-(n+1)/2) = 1;
+            errorVector(2*n-i) = 1;
             break;
         end
-            errorDetected = 0;
-     end
+        errorDetected = 0;
+    end
 
     % Buffer register update
     bufferReg = circshift(bufferReg,[1 1]);
