@@ -1,6 +1,5 @@
 function [ errSynd ] = generateErrExpr( n, genPol )
 
-n = 15;
 r = degree(genPol);
 
 genVec = pol2polvec(genPol);
