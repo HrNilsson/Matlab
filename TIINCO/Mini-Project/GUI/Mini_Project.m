@@ -22,7 +22,7 @@ function varargout = Mini_Project(varargin)
 
 % Edit the above text to modify the response to help Mini_Project
 
-% Last Modified by GUIDE v2.5 04-Mar-2014 12:26:20
+% Last Modified by GUIDE v2.5 04-Mar-2014 20:17:02
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -540,7 +540,7 @@ for i = 1:n*2
     receiveVector = circshift(receiveVector,[1 1]);
     receiveVector(1) = 0;
     
-    if(stepping == 1)
+    if(stepping == 1 && i ~=2*n)
         %Update GUI
         set(handles.txtBuffer,'String', mat2str(bufferReg));
         set(handles.txtCorrected,'String', mat2str(codeVector));
@@ -574,4 +574,10 @@ guidata(hObject,handles);
 
 
 
+function txtTag_Callback(hObject, eventdata, handles)
+% hObject    handle to txtTag (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
+% Hints: get(hObject,'String') returns contents of txtTag as text
+%        str2double(get(hObject,'String')) returns contents of txtTag as a double
