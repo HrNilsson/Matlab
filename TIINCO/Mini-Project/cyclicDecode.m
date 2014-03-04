@@ -44,7 +44,9 @@ for i = 1:n*2
     for j = 1:n
         if(isequal(errSyndTable(j,:),syndromeReg))
             errorDetected = 1;
-            errorVector(2*n-i) = 1;
+            if(i >= n)
+                errorVector(2*n-i) = 1;
+            end
             break;
         end
         errorDetected = 0;
