@@ -62,9 +62,11 @@
 *.out
 *.synctex.gz
 *.orig
+*.txss
+*.tks
 
-/Document/*.pdf
-/Document/**/*.pdf
+/Report/*.pdf
+/Report/**/*.pdf
 
 ####### Temporary folders ####### 
 [Bb]in
