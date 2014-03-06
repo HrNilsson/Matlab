@@ -1,0 +1,40 @@
+\documentclass[oneside, 12pt]{memoir}
+
+\input{modules/Preamble}
+
+%FixMe pakken viser små kommentarer, hvor der skal rettes
+%--------------------------------------------------
+%Brug med følgende: \fxnote{det her skal uddybes!} 
+%Se liste over alle fixMe's: \listoffixmes
+%Erstat 'draft' med 'final' for at fjerne alle kommentarer
+%--------------------------------------------------
+\usepackage[footnote,final,english,silent,nomargin]{fixme}
+
+
+\begin{document}
+
+\begin{titlingpage}
+	\subfile{Frontpage}
+\end{titlingpage}
+
+\newpage
+\subfile{VersionHistory}
+
+\newpage
+\tableofcontents*
+%\newpage
+%\listoffigures*
+
+%\listoffixmes
+
+\newpage
+
+
+\bibliographystyle{ieeetr}
+\renewcommand{\bibname}{2 Reference Document}
+\bibliography{../References}
+
+
+
+
+\end{document}

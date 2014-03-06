@@ -1,0 +1,112 @@
+
+%\newcounter{ctStep}
+%\setcounter{ctStep}{0}
+%\newcommand{\step}{%
+%\addtocounter{ctStep}{1}%
+%\arabic{ctStep}}
+
+
+%--------------------------------------------------
+%\begin{DataTable}
+%\Record
+%{Aktion to take}
+%{Expectation}
+%{Code}
+%\RecordAddi
+%{Marker}
+%{Aktion to take}
+%{Expectation}
+%{Code}
+%\end{DataTable}
+%--------------------------------------------------
+\newcommand{\TCfirst}{0.02 \textwidth}
+\newcommand{\TCsecond}{0.40 \textwidth}
+\newcommand{\TCthird}{0.39 \textwidth}
+\newcommand{\TCfourth}{0.08 \textwidth}
+
+\newenvironment{DataTable}
+{\begin{longtable}{ p{\TCfirst}  p{\TCsecond} p{\TCthird} p{\TCfourth} }
+\hline \multicolumn{2}{l}{\textbf{Fields and relationships}} & \textbf{Example solution} & \textbf{Code} \\ \hline}
+{\hline \end{longtable}
+\setcounter{ctStep}{0}}
+
+
+
+
+%------------------------------------
+% 	Documentation and installation Table
+%------------------------------------
+
+\newcommand{\dFirst}{0.50 \textwidth}
+\newcommand{\dSecond}{0.30 \textwidth}
+\newcommand{\dThird}{0.05 \textwidth}
+
+\newenvironment{DocTable}
+{\begin{longtable}{ p{\dEnum} p{\dFirst}  p{\dSecond} p{\dThird} }
+\hline \multicolumn{2}{l}{\begin{minipage}{\dSum}\textbf{Requirements:}\end{minipage}} & \textbf{Example solution} & \textbf{Code} \\ \hline}
+{\hline \end{longtable}
+\setcounter{ctStep}{0}}
+
+
+%---------------------------------------------
+%	Backward and forward Traceability matrix	
+%---------------------------------------------
+%\begin{TraceForward}{SR}{DDD}
+%\TF
+%{a}
+%{b}
+%{c}
+%
+%\TF
+%{e}
+%{d}
+%{f}
+%
+%\end{TraceForward}
+%
+%\begin{TraceBackward}{SR}{DDD}
+%\TB
+%{a}
+%{b}
+%{c}
+%
+%\TB
+%{e}
+%{d}
+%{f}
+%
+%\end{TraceBackward}
+%---------------------------------------------
+
+\newcommand{\fFirst}{0.10 \textwidth}
+\newcommand{\fSecond}{0.68 \textwidth}
+\newcommand{\fThird}{0.15 \textwidth}
+
+\newcommand{\bFirst}{0.11 \textwidth}
+\newcommand{\bSecond}{0.635 \textwidth}
+\newcommand{\bThird}{0.17 \textwidth}
+
+
+\newenvironment{TraceForward}[2]%
+{%
+	\begin{longtable}{ p{\fFirst}  p{\fSecond} p{\fThird} }
+	\hline \textbf{#1} & \textbf{System Requirement} & \textbf{#2} \\ \hline%
+}{\hline \end{longtable}}
+
+
+\newenvironment{TraceBackward}[2]%
+{%
+	\begin{longtable}{ p{\bFirst}  p{\bSecond} p{\bThird} }
+	\hline \begin{minipage} [t]{\bFirst} \textbf{#1} \vspace{0pt}\end{minipage} & \textbf{Functional Requirement} & \textbf{#2} \\ \hline%
+}{\hline \end{longtable}}
+
+
+\newcommand{\TF}[3]%
+{\parbox[t]{\fFirst}{#1} & %
+\parbox[t]{\fSecond}{#2} & %
+\parbox[t]{\fThird}{#3} \\}
+
+\newcommand{\TB}[3]%
+{\parbox[t]{\bFirst}{#1} & %
+\parbox[t]{\bSecond}{#2} & %
+\parbox[t]{\bThird}{#3} \\}
