@@ -22,7 +22,7 @@ function varargout = Mini_Project(varargin)
 
 % Edit the above text to modify the response to help Mini_Project
 
-% Last Modified by GUIDE v2.5 04-Mar-2014 20:17:02
+% Last Modified by GUIDE v2.5 06-Mar-2014 10:50:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -548,6 +548,8 @@ for i = 1:n*2
         set(handles.txtCalcError,'String', mat2str(errorVector));
         set(handles.txtTag,'String', tag);
         set(handles.txtTag,'BackgroundColor', [1 1 1]);
+        set(handles.txtDecError,'BackgroundColor', [1 1 1]);
+        set(handles.txtDecError,'String', 'Not set.');
         guidata(hObject,handles);
         % GUI wait
         uiwait;
@@ -560,6 +562,14 @@ if(isequal(syndromeReg,zeros(1,r)))
 else
     tag = 'Uncorrectable error';
     set(handles.txtTag,'BackgroundColor', [1 0 0]);
+end
+
+if(~isequal(handles.code,codeVector) && (strcmp(tag,'Correctable')))
+    set(handles.txtDecError,'BackgroundColor', [1 0 0]);
+    set(handles.txtDecError,'String', 'Error');
+else
+    set(handles.txtDecError,'BackgroundColor', [0 1 0]);
+    set(handles.txtDecError,'String', 'No error');
 end
 
 %Update GUI
@@ -581,3 +591,20 @@ function txtTag_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of txtTag as text
 %        str2double(get(hObject,'String')) returns contents of txtTag as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function txtDecError_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to txtDecError (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+
+function txtDecError_Callback(hObject, eventdata, handles)
+% hObject    handle to txtDecError (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of txtDecError as text
+%        str2double(get(hObject,'String')) returns contents of txtDecError as a double
