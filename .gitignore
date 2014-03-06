@@ -69,6 +69,7 @@
 /Report/**/*.pdf
 
 ####### Temporary folders ####### 
+[Bb]uild*/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
