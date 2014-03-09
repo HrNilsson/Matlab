@@ -402,6 +402,18 @@ function txtN_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of txtN as text
 %        str2double(get(hObject,'String')) returns contents of txtN as a double
 handles.n = str2double(get(hObject,'String'));
+handles.received = zeros(1,handles.n);
+handles.buffer = zeros(1,handles.n);
+handles.corrected = zeros(1,handles.n);
+handles.syndrome = zeros(1,handles.n-handles.k);
+handles.code = zeros(1,handles.n-handles.k);
+handles.error = zeros(1,handles.n);
+
+set(handles.txtReceived,'String', mat2str(zeros(1,handles.n)));
+set(handles.txtBuffer,'String', mat2str(zeros(1,handles.n)));
+set(handles.txtCorrected,'String', mat2str(zeros(1,handles.n)));
+set(handles.txtSyndrome,'String', mat2str(zeros(1,handles.n-handles.k)));
+set(handles.txtCalcError,'String', mat2str(zeros(1,handles.n)));
 
 % Update handles structure
 guidata(hObject,handles);
@@ -429,7 +441,9 @@ function txtK_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of txtK as a double
 
 handles.k = str2double(get(hObject,'String'));
+handles.syndrome = zeros(1,handles.n-handles.k);
 
+set(handles.txtSyndrome,'String', mat2str(zeros(1,handles.n-handles.k)));
 % Update handles structure
 guidata(hObject,handles);
 
