@@ -64,13 +64,33 @@ Conditions for operation, stated in the assignment, are as follows:
 \item Message length: \textit{7}
 \item Given generator polynomial:
 \begin{align}
-g(X) &= 1 + X^4 + x^6 + X^7 + X^8
+g(X) &= 1 + X^4 + X^6 + X^7 + X^8
 \end{align}
 
 \end{itemize}
 
-
+\newpage
 \section{Implementation requirements}
+These are requirements that the implementing group has chosen for the project.
+\begin{itemize}
+\item 
+The MATLAB code for this project shall be implemented with a GUI that visualizes the flow and operation of the Meggitt decoder.
 
+\item
+The implementation shall be generalized so that \textit{n}, \textit{k} and the generator polynomial can be user specified.
+
+\item
+The implementation shall only accept double error correcting polynomials.
+
+\item
+The user shall be able to specify any error pattern of length: \textit{n}.
+
+\item
+The implementation shall only process (encode, affect with error and decode) one message vector at a time.
+
+\item
+It shall be possible step through every cycle of the decoding or run it all at once. 
+
+\end{itemize}
 
 \end{document}
