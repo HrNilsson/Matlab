@@ -2,8 +2,73 @@
 \begin{document}
 
 \chapter{Requirements}
+This chapter specifies the requirements stated for this project, stated in the assignment.
+Further it states the chosen requirements, delimiting the implementation of the project.
 
 \section{Assignment requirements}
+\subsection{Cyclic encoder}
+A cyclic encoder function shall be implemented in MATLAB
+
+\begin{itemize}
+
+\item 
+The function must accept two inputs:
+
+	\begin{itemize}
+	\item A Generator polynomial
+	\item A message vector
+	\end{itemize}
+
+\item The Function must have one output:
+
+	\begin{itemize}
+	\item A code vector
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Meggitt decoder}
+A cyclic decoder based on the Meggitt Algorithm shall be implemented in MATLAB.
+
+\begin{itemize}
+
+\item 
+The function must accept four inputs:
+
+	\begin{itemize}
+	\item Received vector
+	\item Generator polynomial
+	\item Code length: \textit{n}
+	\item Message length: \textit{k}
+	\end{itemize}
+
+\newpage
+\item The Function must have three outputs:
+
+	\begin{itemize}
+	\item Error vector
+	\item Code vector
+	\item A tag, indicating if recieved vector is:
+		\subitem decodable, or
+		\subitem undecodable but detectable
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Conditions for operation}
+Conditions for operation, stated in the assignment, are as follows:
+
+\begin{itemize}
+
+\item Code length: \textit{15}
+\item Message length: \textit{7}
+\item Given generator polynomial:
+\begin{align}
+g(X) &= 1 + X^4 + x^6 + X^7 + X^8
+\end{align}
+
+\end{itemize}
+
 
 \section{Implementation requirements}
 
