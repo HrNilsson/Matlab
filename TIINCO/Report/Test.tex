@@ -2,7 +2,18 @@
 \begin{document}
 
 \chapter{Test}
+The encoding and decoding functions have been tested using the graphical user interface. 
 
+In Figure \ref{fig:GUIrun} the output after a test can be seen. 
+It is seen that the received vector is decoded correctly. 
+Similar tests have been made for different messages and error vectors. 
 
+When the error vector contains more than two errors, two different outputs have been observed:
+\begin{itemize}
+\item The decoder is unable to correct the error and displays 'Uncorrectable error'.
 
+\item The decoder corrects the received vector to another codeword. The 'Tag' states 'Correctable' and the 'Decoder error' states 'Error', which is to show that the corrected vector and the original code vector is different.
+\end{itemize}
+
+When the generator polynomial is not a double-correcting polynomial, the output is not to be trusted.
 \end{document}
