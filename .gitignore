@@ -65,8 +65,8 @@
 *.txss
 *.tks
 
-/Report/*.pdf
-/Report/**/*.pdf
+/**/Report/*.pdf
+/**/Report/**/*.pdf
 
 ####### Temporary folders ####### 
 [Bb]uild*/
