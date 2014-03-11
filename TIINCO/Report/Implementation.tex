@@ -2,8 +2,74 @@
 \begin{document}
 
 \chapter{Implementation}
+The first section of this chapter describes the graphical user interface. 
+The following sections contains the Matlab code for the functions implemented. 
+This includes in-line comments and is thus not described further. 
+
+Note, the GUI code is not included!
+
+\section{Graphical User Interface}
+The graphical user interface has been implemented in Matlab, using the Matlab GUIDE. On Figure \ref{fig:GUI} the start-up screen can be seen. On Figure \ref{fig:GUIrun} the same view is shown, after a complete encoding and decoding has been performed. 
+
+The GUI offers a lot of handles to change the input of the encoding and decoding procedure. These will all be described here:
+
+\begin{itemize}
+\item \textbf{n}: The total code length can be adjusted. As default it is set to 15.
+
+\item \textbf{k}: The message length can be adjusted. As default is is set to 7.
+
+\item Message vector: The button 'Generate Message' generates a random message vector with length k. It will be displayed in the field named 'Message'. Additionally it is possible to enter a message manually in the 'Message' field.
+
+\item \textbf{Generator polynomial}: The button 'Generate Polynomial' writes the default polynomial in the field 'Generator polynomial'. The default is: $G(X) = 1 + X^4 + X^6 + X^7 + X^8$. Additionally it is possible to enter another polynomial manually. 
+
+\item \textbf{Code vector}: The button 'Generate Code' encodes the message vector, using the generator polynomial and displays this in the 'Code vector' field.
+
+\item \textbf{Error vector}: The button 'Generate Error' creates a vector of size n with one or two random bits set to '1'. Additionally this could also be entered manually.
+
+\item \textbf{Run the code}: The button 'Run' will calculate the received vector, based on the code vector and the error vector. Further it will attempt to decode this vector. The fields 'Received', 'Buffer', 'Corrected', 'Syndrome', 'Calculated error', 'Tag', and 'Decoder error' will all be updated with the final values.
+
+\item \textbf{Single stepping}: The button 'Single step' will calculate the received vector and process a single step in the Meggit decoder. All fields will be updated after each step. 
+
+\item \textbf{Resetting}: The button 'Reset' clears all the fields use in the Meggit decoder, but not the inputs.
+
+\end{itemize}
+
+
+A brief description of the GUI outputs fields:
+\begin{itemize}
+\item \textbf{'Received'}: This field shows the calculated received vector, and its shifting during decoding.
+
+\item \textbf{'Buffer'}: This field shows the buffer register during and after the Meggit decoding.
+
+\item \textbf{'Corrected'}: This field shows the corrected vector after decoding.
+
+\item \textbf{'Syndrome'}: This field shows the syndrome register of the Meggit decoder.
+
+\item \textbf{'Calculated error'}: This field shows where the Meggit decoder has corrected error bits. 
+
+\item \textbf{'Tag'}: This field displays whether the error pattern could be corrected or not.
+
+\item \textbf{'Decoder error'}: This field displays whether the corrected vector is equal to the original code vector or not. 
+\end{itemize}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.9\textwidth]{GUI}
+\caption{Graphical User Interface on startup.}
+\label{fig:GUI}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.9\textwidth]{GUIrun}
+\caption{Graphical User Interface after a complete run.}
+\label{fig:GUIrun}
+\end{center}
+\end{figure}
+
+\newpage
 \section{Encoder}
-lorem ipsum
 \begin{lstlisting}[caption=Cyclic encoding]
 function [ codeVector ] = cyclicEncode( genPol, messageVector )
 % Returns a code vector, given a meassage vector and a cyclic 
@@ -24,7 +90,7 @@ codeVector = rem(messageVector * G,2);
 end
 \end{lstlisting}
 
-
+\newpage
 \section{Meggit decoder}
 
 \begin{lstlisting}[caption=Cyclic Meggit decoding]
@@ -110,6 +176,7 @@ end
 end
 \end{lstlisting}
 
+\newpage
 \begin{lstlisting}[caption= Generation of error syndrome vectors.]
 function [ errSynd ] = generateErrExpr( n, genPol )
 % Returns the syndrome vectors, used in a Meggigt decoder for a 
@@ -135,6 +202,7 @@ end
 end
 \end{lstlisting}
 
+\newpage
 \section{Helper functions}
 \begin{lstlisting}[caption=Maximum degree of polynomial]
 function d = degree(eq)
@@ -154,7 +222,7 @@ end
 end
 \end{lstlisting}
 
-
+\newpage
 \begin{lstlisting}[caption=Convert polynomial to vector form.]
 function polvec = pol2polvec(Pol,n)
 % Returns the polynomial representation of a symbolic polynomial as a vector.
@@ -171,13 +239,5 @@ switch(nargin)
         polvec = rot90(sym2poly(Pol),2);
 end
 \end{lstlisting}
-
-\section{Graphical User Interface}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[width=\textwidth]{GUI}
-\end{center}
-\end{figure}
 
 \end{document}
