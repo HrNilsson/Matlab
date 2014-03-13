@@ -4,10 +4,41 @@
 \chapter{Theory}
 
 \section{Cyclic syndrome decoding}
+The syndrome of a cyclic code can be calculated efficiently using a sequential division circuit, based on the generator polynomial.
+This is done by shifting the entire received vector into the division circuit.
+
+The syndrome of the received vector is now readable in the delay line of the division circuit.
+If the circuit is then shifted further, with no input but except any correction bits, the next syndrome is readable in the delay line of the division circuit.
+
+This is employed in the Meggitt decoder to continuously check for errors in the received vector.
 
 \section{Meggitt decoding}
 
 \subsection{The Meggitt decoding circuit}
+In this the circuit of the Meggitt decoder is presented.
+
+% Figur
+
+The Meggitt decoder consist of:
+\begin{itemize}
+\item
+A receive buffer \textit{r(x)}
+
+\item
+A Buffer register
+
+\item
+A division circuit with a Syndrome register
+
+\item
+An Error Pattern detection circuit
+
+\subitem This circuit normally consist of combinational logic for single error detection, and table lookup in multi error detection.
+
+\item
+A Code register containing the corrected vector.
+
+\end{itemize}
 
 \subsection{The Meggitt decoding algorithm}
 
