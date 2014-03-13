@@ -51,7 +51,9 @@ A division circuit with a Syndrome register
 \item
 An Error Pattern detection circuit
 
-\subitem This circuit normally consist of combinational logic for single error detection, and table lookup in multi error detection.
+	\begin{itemize}
+	\item This circuit normally consist of combinational logic for single error detection, and table lookup in multi error detection.
+	\end{itemize}
 
 \item
 A Code register containing the corrected vector.
@@ -60,16 +62,55 @@ A Code register containing the corrected vector.
 
 \subsection{The Meggitt decoding algorithm}
 
+\begin{enumerate}
+
+\item
+Shift the entire received vector into the Buffer register and Syndrome register simultaneously.
+
+\item
+Compare Syndrome register with all syndromes for errors in the last position of the codeword.
+\label{step:compare}
+
+	\begin{itemize}
+	\item[--]
+	If the syndrome matches output a '1' from the Error detection circuit.
+	
+	\item[--]
+	Else output a '0' from the Error detection circuit.
+	\end{itemize}
+	
+\item
+Shift the Buffer and Syndrome register ahead once.
+
+	\begin{itemize}
+	\item[--]
+	The corrected symbol is shifted into the Code register
+	\item[--]
+	The Syndrome feedback is also corrected
+	\end{itemize}
+	
+\item
+If the entire codeword have not yet been shifted out of the Buffer register, proceed from step \ref{step:compare}. 
+Else proceed to step \ref{step:tag}.
+
+\item
+Check validity of corrected codeword.
+\label{step:tag}
+	
+	\begin{itemize}
+	\item[--]
+	If the Syndrome register zero vector, then the corrected codeword is a valid codeword.
+	The codeword can still have been affected by a undetectable error pattern.
+	
+	\item[--]
+	Else: An uncorrectable error has been detected.
+	
+	\end{itemize}
 
 
 
 
 
-
-
-
-
-
-
+\end{enumerate}
 
 \end{document}
