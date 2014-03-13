@@ -4,13 +4,23 @@
 \chapter{Theory}
 
 \section{Cyclic syndrome decoding}
-The syndrome of a cyclic code can be calculated efficiently using a sequential division circuit, based on the generator polynomial.
+The syndrome of a cyclic code can be calculated efficiently using a sequential division circuit (See Figure \ref{fig:CyclicSyndromeDecoder}), based on the generator polynomial.
 This is done by shifting the entire received vector into the division circuit.
 
 The syndrome of the received vector is now readable in the delay line of the division circuit.
 If the circuit is then shifted further, with no input but except any correction bits, the next syndrome is readable in the delay line of the division circuit.
 
 This is employed in the Meggitt decoder to continuously check for errors in the received vector.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width = \textwidth]{CyclicSyndromeDecoder}
+\caption{Sequential division circuit for generator polynomial: 
+$g(X) = 1 + X + X^3$
+}
+\label{fig:CyclicSyndromeDecoder}
+\end{center}
+\end{figure}
 
 \newpage
 \section{Meggitt decoding}
@@ -22,7 +32,7 @@ In figure \ref{fig:CyclicDecoder} the circuit of the Meggitt decoder is presente
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width = \textwidth]{CyclicDecoder}
-\caption{Meggit decoder}
+\caption{Meggitt decoder circuit}
 \label{fig:CyclicDecoder}
 \end{center}
 \end{figure}
