@@ -38,3 +38,5 @@ for i = 1:2^m
     end
     P(i) = temp;
 end
+
+% René Nilsson - 10783

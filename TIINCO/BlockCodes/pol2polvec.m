@@ -13,3 +13,5 @@ switch(nargin)
     case 1
         polvec = rot90(sym2poly(Pol),2);
 end
+
+% René Nilsson - 10783
