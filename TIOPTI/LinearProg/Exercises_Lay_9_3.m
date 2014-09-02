@@ -1,4 +1,4 @@
-%% Exercises in [Lay] chapter 9.2
+%% Exercises in [Lay] chapter 9.3
 
 %% 15:
 % The augmented matrix:
