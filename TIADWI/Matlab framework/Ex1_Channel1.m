@@ -46,7 +46,12 @@ plot(abs(H));
 % 
 % meanDelay = meanDelay/sum(h)
 
-meanDelay = a(:,1)'*a(:,2)/sum(a(:,2))
+% Convert to Power
+Ac = a;
+Ac(:,2) = Ac(:,2).^2;
+Ac
+
+meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2))
 
 
 % RMSdelaySpread = 0;
@@ -58,24 +63,12 @@ meanDelay = a(:,1)'*a(:,2)/sum(a(:,2))
 % 
 % RMSdelaySpread = sqrt(RMSdelaySpread/sum(h))
 
-RMSdelaySpread = sqrt(((a(:,1)-meanDelay).^2)'*a(:,2)/sum(a(:,2)))
+RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)))
 
 Bc = 1/RMSdelaySpread
  
 x = filter(h,1,txsignal);
 
-
-f = 0:0.1:fsample;
-
-H1 = sum(a(:,2)*exp(-1j*2*pi*f*a(:,1)))
-
-for i = 0:numel(f)
-    
-    
-end
-
-subplot(212)
-plot(f,H1)
 
 
 end

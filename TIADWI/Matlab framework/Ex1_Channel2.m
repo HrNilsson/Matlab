@@ -11,6 +11,10 @@ a = [
     8000 0.6 
     ];
 
+Ac = a;
+Ac(:,2) = Ac(:,2).^2;
+Ac
+
 % Scale for correct time unit
 a(:,1) = a(:,1)*10^-9  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
 
