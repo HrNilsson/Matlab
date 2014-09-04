@@ -11,13 +11,12 @@ a = [
     8000 0.6 
     ];
 
-Ac = a;
-Ac(:,2) = Ac(:,2).^2;
-Ac
-
 % Scale for correct time unit
 a(:,1) = a(:,1)*10^-9  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
 
+Ac = a;
+Ac(:,2) = Ac(:,2).^2;
+Ac
 
 maxDelay = max(a(:,1));
 
@@ -51,7 +50,7 @@ plot(abs(H));
 % 
 % meanDelay = meanDelay/sum(h)
 
-meanDelay = a(:,1)'*a(:,2)/sum(a(:,2));
+meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2));
 
 
 % RMSdelaySpread = 0;
@@ -63,7 +62,7 @@ meanDelay = a(:,1)'*a(:,2)/sum(a(:,2));
 % 
 % RMSdelaySpread = sqrt(RMSdelaySpread/sum(h))
 
-RMSdelaySpread = sqrt(((a(:,1)-meanDelay).^2)'*a(:,2)/sum(a(:,2)));
+RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)));
  
 sum(h(1,:))
 x = filter(h,1,txsignal);
