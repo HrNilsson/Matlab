@@ -1,12 +1,8 @@
 %% System model:
+clear;clc
 
 % Input message data
-[	
-	TxMessage ...
-	MessageSampleRate ...
-	BitsPerMessage
-] ...
-	= ADWI_Message();
+[TxMessage, MessageSampleRate,BitsPerMessage] = ADWI_Message();
 
 % Encode message
 [TxEncodedData]=ADWI_Encoder(TxMessage,MessageSampleRate,BitsPerMessage);

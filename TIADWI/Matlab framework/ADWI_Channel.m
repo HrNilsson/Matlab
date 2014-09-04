@@ -8,4 +8,8 @@ function [x] = ADWI_Framework_Channel(txsignal,fsample,bitspersample)
 %   x : Channel output.
 %
 
-x=txsignal;
+addpath('..\Exercise1');
+
+x = Ex1_Channel1(txsignal,fsample,bitspersample);
+
+% x=txsignal;
