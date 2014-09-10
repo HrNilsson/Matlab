@@ -1,4 +1,4 @@
-function [ x ] = Ex1_Channel2( txsignal,fsample,bitspersample )
+function [ x ] = Ex1_Channel3( txsignal,fsample,bitspersample )
 
 
 % Delay profile [Delay / Amplitude weight ]

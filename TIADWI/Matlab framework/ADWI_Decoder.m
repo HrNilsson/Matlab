@@ -8,4 +8,6 @@ function [x] = ADWI_Decoder(RxEncodedData,fsample,bitspersample)
 %   x : Reconstructed Message 
 %
 
+
 x=RxEncodedData;
+% x = Ex1_Decoder3( RxEncodedData,fsample,bitspersample );

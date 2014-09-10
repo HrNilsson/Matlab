@@ -1,18 +1,18 @@
-function [ x ] = Ex1_Channel2( txsignal,fsample,bitspersample )
+function [ x ] = Ex1_Channel3( txsignal,fsample,bitspersample )
 
 
 % Delay profile [Delay / Amplitude weight ]
 a = [
-    500  0.5 ;
-    1400 0.5 ;
-    1800 0.4 ;
-    2300 0.5 ;
-    5000 0.8 ;
-    8000 0.6 
+    0   0.5 ;
+    32  0.5 ;
+    64  0.4 ;
+    96  0.5 ;
+    128 0.8 ;
+    160 0.6 
     ];
 
 % Scale for correct time unit
-a(:,1) = a(:,1)*10^-9  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
+a(:,1) = a(:,1)*10^-6  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
 
 % Convert amplitude to power
 Ac = a;
@@ -28,10 +28,10 @@ Ts = 1/fsample
 h = abs(3.3-i*4.4076026506002340748e-15);
 
 % Mean delay is weigthed average:
-meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2));
+meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2))
 
 % RMS delay spread
-RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)));
+RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)))
  
 % Coherent bandwidth:
 Bc = 1/RMSdelaySpread
@@ -46,5 +46,6 @@ x = filter(h,1,txsignal);
 
 snr = 5; % SNR ratio in DB:
 % x = awgn(x,snr,'measured');
-end
 
+
+end
