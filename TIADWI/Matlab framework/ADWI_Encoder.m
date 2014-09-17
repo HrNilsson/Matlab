@@ -7,5 +7,5 @@ function [x] = ADWI_Encoder(message,fsample,bitspersample)
 %   x : Encoded bit stream
 
 
-% x = message;
-x=Ex1_Encoder3(message,fsample,bitspersample);
+x = message;
+% x=Ex1_Encoder3(message,fsample,bitspersample);

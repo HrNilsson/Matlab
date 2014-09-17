@@ -12,6 +12,6 @@ addpath('..\Exercise1');
 
 %x = Ex1_Channel1(txsignal,fsample,bitspersample);
 % x = Ex1_Channel2(txsignal,fsample,bitspersample);
-x = Ex1_Channel3(txsignal,fsample,bitspersample);
+x = Ex1_Channel2_2(txsignal,fsample,bitspersample);
 
 % x=txsignal;
