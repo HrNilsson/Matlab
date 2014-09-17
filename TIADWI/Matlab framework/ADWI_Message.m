@@ -7,7 +7,8 @@ function [x,y,z] = ADWI_Message()
 %y:  Message Sample Rate
 %z:  No. of bits per message
 
-wavFileName = 'SoundMessage.wav';
+% wavFileName = 'SoundMessage.wav';
+wavFileName = 'ReducedWav.wav';
 
 % [x y z]=wavread(wavFileName);
 [x, y] = audioread(wavFileName);

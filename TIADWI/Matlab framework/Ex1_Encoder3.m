@@ -6,6 +6,7 @@ x = message + 1;
 x = x .* 2^(bitspersample-1);
 x = de2bi(x,bitspersample);
 x = reshape(x',[],1);
+x = (x*2)-1;
 
 end
 

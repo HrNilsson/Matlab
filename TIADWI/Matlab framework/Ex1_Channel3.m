@@ -1,4 +1,4 @@
-function [ x ] = Ex1_Channel3( txsignal,fsample,bitspersample )
+function [ x ] = Ex1_Channel2_2( txsignal,fsample,bitspersample )
 
 
 % Delay profile [Delay / Amplitude weight ]
@@ -24,27 +24,50 @@ Ts = 1/fsample
 
 % Since the maximum delay is less than the symbol time, we make the
 % narrowband assumption: m(t-tau) = m(t).
-% See mathcad document Ex2.xmcd for calculation of transfer function:
-h = abs(3.3-i*4.4076026506002340748e-15);
+
+upsamp = ceil(250/16);
+fc = 2.4 * 10^9;
+
+lImp = ceil(max(a(:,1))*upsamp*fsample);
+
+% Init impRes
+impRes = zeros(lImp,1);
+
+for i = size(a,1)
+   
+    impRes(round(a(i,1)*upsamp*fsample)) = a(i,2)*exp(-1*j*2*fc*a(i,1));
+    
+end
+
+txUp = upsample(txsignal,upsamp); % upsample
+txUp = filter(ones(1,upsamp),1,txUp); % LP filter
+
+rxUp = txUp;%filter(impRes,1,txUp); % Filter with channel
+rxSignal = txsignal;% = downsample(rxUp,upsamp); % Downsample to Baseband
+
+
+
+
+
 
 % Mean delay is weigthed average:
 meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2));
 
 % RMS delay spread
-RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)));
+RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)))
  
 % Coherent bandwidth:
 Bc = 1/RMSdelaySpread
 % Note Bc = 388kHz >> B = 44.1kHz, which agrees with the narrowband
 % assumption.
 
-x = filter(h,1,txsignal);
+x = real(rxSignal);
 
 % Adding AWGN to the signal: 
 % Note: Using -15 dB is barely hearable 
 % Changing SNR does not change BER.
 
-snr = 5; % SNR ratio in DB:
+snr = 2; % SNR ratio in DB:
 % x = awgn(x,snr,'measured');
 end
 

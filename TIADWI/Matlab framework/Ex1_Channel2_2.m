@@ -25,7 +25,7 @@ Ts = 1/fsample
 % Since the maximum delay is less than the symbol time, we make the
 % narrowband assumption: m(t-tau) = m(t).
 
-upsamp = 250;
+upsamp = ceil(250/16);
 fc = 2.4 * 10^9;
 
 lImp = ceil(max(a(:,1))*upsamp*fsample);
