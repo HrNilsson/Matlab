@@ -11,6 +11,9 @@ a = [
     8000 0.6 
     ];
 
+% Opgave 3.3.2
+a(:,1) = a(:,1)*0.1;
+
 % Scale for correct time unit
 a(:,1) = a(:,1)*10^-9  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
 
@@ -42,8 +45,8 @@ end
 txUp = upsample(txsignal,upsamp); % upsample
 txUp = filter(ones(1,upsamp),1,txUp); % LP filter
 
-rxUp = txUp;%filter(impRes,1,txUp); % Filter with channel
-rxSignal = txsignal;% = downsample(rxUp,upsamp); % Downsample to Baseband
+rxUp = filter(impRes,1,txUp); % Filter with channel
+rxSignal = downsample(rxUp,upsamp); % Downsample to Baseband
 
 
 
@@ -67,7 +70,7 @@ x = real(rxSignal);
 % Note: Using -15 dB is barely hearable 
 % Changing SNR does not change BER.
 
-snr = 2; % SNR ratio in DB:
-% x = awgn(x,snr,'measured');
+snr = 10; % SNR ratio in DB:
+x = awgn(x,snr,'measured');
 end
 

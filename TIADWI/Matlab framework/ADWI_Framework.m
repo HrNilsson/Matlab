@@ -31,4 +31,4 @@ player.play;
 
 % Bit error rate (BER):
 % BitErrorVector = xor(TxEncodedData, RxEncodedData);
-BER = sum(BitErrorVector) / length(TxEncodedData)
+% BER = sum(BitErrorVector) / length(TxEncodedData)
