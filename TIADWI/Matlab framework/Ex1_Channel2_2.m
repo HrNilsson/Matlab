@@ -54,7 +54,7 @@ rxSignal = downsample(rxUp,upsamp); % Downsample to Baseband
 meanDelay = Ac(:,1)'*Ac(:,2)/sum(Ac(:,2));
 
 % RMS delay spread
-RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)));
+RMSdelaySpread = sqrt(((Ac(:,1)-meanDelay).^2)'*Ac(:,2)/sum(Ac(:,2)))
  
 % Coherent bandwidth:
 Bc = 1/RMSdelaySpread
@@ -67,7 +67,7 @@ x = rxSignal;
 % Note: Using -15 dB is barely hearable 
 % Changing SNR does not change BER.
 
-snr = 5; % SNR ratio in DB:
-% x = awgn(x,snr,'measured');
+snr = 2; % SNR ratio in DB:
+x = awgn(x,snr,'measured');
 end
 

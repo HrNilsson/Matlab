@@ -30,5 +30,5 @@ player.play;
 %Various manipulations and presentations
 
 % Bit error rate (BER):
-BitErrorVector = xor(TxEncodedData, RxEncodedData);
+% BitErrorVector = xor(TxEncodedData, RxEncodedData);
 BER = sum(BitErrorVector) / length(TxEncodedData)
