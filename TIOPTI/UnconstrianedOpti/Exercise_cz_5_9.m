@@ -1,15 +1,10 @@
 %% 5.9
 
-[x1, x2] = meshgrid(-10:1:10,-10:1:10)
+[x1, x2] = meshgrid(-10:1:10,-10:1:10);
 
 f1 = x1.^2-x2.^2;
-f2 = 2*x1*x2; % This does not work :)--:(
+f2 = 2*x1.*x2; 
 
-for i=1:numel(x1(:,1))
-    for j = 1:numel(x1(1,:))
-        f2(j,i) = 2*x1(j,i)*x2(j,i);
-    end
-end
 %%
 figure(1)
 surf(x1,x2,f1);
