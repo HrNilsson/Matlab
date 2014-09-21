@@ -1,4 +1,4 @@
-function [x] = ADWI_Framework_Channel(txsignal,fsample,bitspersample)
+function [x] = ADWI_Channel(txsignal,fsample,bitspersample)
 %
 %   Channel definition. Output is delivered to receiver
 %   so the block should include all channel effects: noise,
@@ -8,10 +8,9 @@ function [x] = ADWI_Framework_Channel(txsignal,fsample,bitspersample)
 %   x : Channel output.
 %
 
-addpath('..\Exercise1');
-
 %x = Ex1_Channel1(txsignal,fsample,bitspersample);
-% x = Ex1_Channel2(txsignal,fsample,bitspersample);
-x = Ex1_Channel3(txsignal,fsample,bitspersample);
+% x = Ex1_Channel2_2(txsignal,fsample,bitspersample);
+% x = Ex1_Channel3(txsignal,fsample,bitspersample);
+x = Ex2_Channel1(txsignal,fsample,bitspersample);
 
 % x=txsignal;
