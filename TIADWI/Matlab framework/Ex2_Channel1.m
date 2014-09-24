@@ -16,6 +16,7 @@ Ts = 1/fsample
 a = zeros(6,2);
 a(:,1) = [1:6].*Ts;
 a(:,2) = ones(1,6);
+a(:,2) = a(:,2)/sum(a(:,2))
 
 % Scale for correct time unit
 % a(:,1) = a(:,1)*10^-6  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
@@ -54,12 +55,18 @@ rxChannel = downsample(rxUp,upsamp); % Downsample to Baseband
 % Note: Using -15 dB is barely hearable 
 % Changing SNR does not change BER.
 
-snr = 5; % SNR ratio in dB:
-rxChannel = awgn(rxChannel,snr,'measured');
+% snr = 5; % SNR ratio in dB:
+% rxChannel = awgn(rxChannel,snr,'measured');
 
 h_eq = ZeroForcingEqualizer(300,size(a,1)); % ZF EQ filter generator
 
-rxSignal = filter(h_eq,1,rxChannel); % EQ filter
+Hch = fft(impRes);
+H_eq = 1./Hch;
+H_eq(abs(H_eq)==Inf) = 1;
+h_eq = abs(ifft(H_eq));
+h_eq = h_eq./max(h_eq);
+
+rxSignal = filter(1,[1 ; h_eq],rxChannel); % EQ filter
 % rxSignal = rxChannel;
 
 
