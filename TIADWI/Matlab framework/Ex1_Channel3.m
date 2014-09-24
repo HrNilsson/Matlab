@@ -1,4 +1,4 @@
-function [ x ] = Ex1_Channel2_2( txsignal,fsample,bitspersample )
+function [ x ] = Ex1_Channel3( txsignal,fsample,bitspersample )
 
 
 % Delay profile [Delay / Amplitude weight ]
@@ -12,7 +12,7 @@ a = [
     ];
 
 % Opgave 3.3.2
-% a(:,1) = a(:,1)*0.1;
+a(:,1) = a(:,1)*0.1;
 
 % Scale for correct time unit
 a(:,1) = a(:,1)*10^-9  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
@@ -38,7 +38,7 @@ impRes = zeros(lImp,1);
 
 for i = 1:size(a,1)
    
-    impRes(round(a(i,1)*upsamp*fsample)) = a(i,2)*exp(-1*j*2*fc*a(i,1));
+    impRes(ceil(a(i,1)*upsamp*fsample)) = a(i,2);
     
 end
 
