@@ -15,7 +15,11 @@ Ts = 1/fsample
 
 a = zeros(6,2);
 a(:,1) = [1:6].*Ts;
+<<<<<<< HEAD
 a(:,2) = ones(1,6)
+=======
+a(:,2) = ones(1,6);
+>>>>>>> c2c34eaac375688991747182c36b9a6015f3f320
 
 % Scale for correct time unit
 % a(:,1) = a(:,1)*10^-6  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
