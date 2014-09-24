@@ -9,5 +9,5 @@ function [x] = ADWI_Decoder(RxEncodedData,fsample,bitspersample)
 %
 
 
-% x=RxEncodedData;
-x = Ex1_Decoder3( RxEncodedData,fsample,bitspersample );
+x=RxEncodedData;
+% x = Ex1_Decoder3( RxEncodedData,fsample,bitspersample );
