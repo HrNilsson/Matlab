@@ -21,7 +21,7 @@ a(:,2) = ones(1,6);
 % a(:,1) = a(:,1)*10^-6  % 10^-3 ms ; 10^-6 µs ; 10^-9 ns
 
 % Scale time
-a(:,1) = a(:,1)*100;
+a(:,1) = a(:,1)*50;
 
 % Convert amplitude to power
 Ac = a;
@@ -48,7 +48,19 @@ txUp = upsample(txsignal,upsamp); % upsample
 txUp = filter(ones(1,upsamp),1,txUp); % LP filter
 
 rxUp = filter(impRes,1,txUp); % Filter with channel
-rxSignal = downsample(rxUp,upsamp); % Downsample to Baseband
+rxChannel = downsample(rxUp,upsamp); % Downsample to Baseband
+
+% Adding AWGN to the signal: 
+% Note: Using -15 dB is barely hearable 
+% Changing SNR does not change BER.
+
+snr = 5; % SNR ratio in dB:
+rxChannel = awgn(rxChannel,snr,'measured');
+
+h_eq = ZeroForcingEqualizer(300,size(a,1)); % ZF EQ filter generator
+
+rxSignal = filter(h_eq,1,rxChannel); % EQ filter
+% rxSignal = rxChannel;
 
 
 % Mean delay is weigthed average:
@@ -69,13 +81,29 @@ Bc = 1/RMSdelaySpread
 % % plot(abs(Himp))
 % subplot(212)
 
+figure(3)
+subplot(311)
+plot(rxChannel)
+hold on
+plot((rxChannel-txsignal).^2,'r')
+hold off
+
+subplot(312)
+plot(rxSignal)
+hold on
+plot((rxSignal-txsignal).^2,'r')
+hold off
+
+subplot(313)
+plot((rxChannel-rxSignal).^2)
+
 x = rxSignal;
 
-% Adding AWGN to the signal: 
-% Note: Using -15 dB is barely hearable 
-% Changing SNR does not change BER.
-
-% snr = 2; % SNR ratio in DB:
-% x = awgn(x,snr,'measured');
+% % % % % Adding AWGN to the signal: 
+% % % % % Note: Using -15 dB is barely hearable 
+% % % % % Changing SNR does not change BER.
+% % % % 
+% % % % snr = 5; % SNR ratio in dB:
+% % % % x = awgn(x,snr,'measured');
 end
 
