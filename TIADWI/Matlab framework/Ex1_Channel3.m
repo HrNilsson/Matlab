@@ -36,7 +36,7 @@ lImp = ceil(max(a(:,1))*upsamp*fsample);
 % Init impRes
 impRes = zeros(lImp,1);
 
-for i = size(a,1)
+for i = 1:size(a,1)
    
     impRes(round(a(i,1)*upsamp*fsample)) = a(i,2)*exp(-1*j*2*fc*a(i,1));
     

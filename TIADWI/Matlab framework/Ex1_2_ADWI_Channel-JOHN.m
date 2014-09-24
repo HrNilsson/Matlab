@@ -19,7 +19,9 @@ fc=2.4e9;
 
 EchoVec=zeros(round(echoes(length(echoes)))*upsamp*44100,1);
 
-for i=1:length(echoes) EchoVec(round(echoes(1,i)*upsamp*44100),1)=echoes(2,i)*exp(-1*j*2*fc*echoes(1,i)); end;
+for i=1:length(echoes) 
+	EchoVec(round(echoes(1,i)*upsamp*44100),1)=echoes(2,i)*exp(-1*j*2*fc*echoes(1,i)); 
+end
 
 tempwav=conv(ones(upsamp,1),upsample(txsignal,upsamp));
 tempsignal=conv(EchoVec,tempwav);
