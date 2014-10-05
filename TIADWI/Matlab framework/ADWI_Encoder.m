@@ -7,6 +7,8 @@ function [x] = ADWI_Encoder(message,fsample,bitspersample)
 %   x : Encoded bit stream
 
 
-
 x = message;
 % x=Ex1_Encoder3(message,fsample,bitspersample);
+% A = dec2bin(uint16(message), bitspersample)';
+% x = A(:);
+%x=message;

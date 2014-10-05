@@ -14,7 +14,6 @@ surf(x1,x2,f2);
 figure(3)
 [C,h1] = contour(f1,[0 12]);
 set(h1,'ShowText','on','TextStep',get(h1,'LevelStep')*2)
-colormap cool
 hold on
 %figure(4)
 [C,h2] = contour(f2,[0 16]);
