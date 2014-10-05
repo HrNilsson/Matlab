@@ -42,8 +42,8 @@ ylabel('20log(|Hc(f)|)')
 ych = conv(txsignal,impRes,'same');
 
 % Adding AWGN to the signal: 
-snr = 25; % SNR ratio in dB:
-ych = awgn(ych,snr,'measured');
+% snr = 5; % SNR ratio in dB:
+% ych = awgn(ych,snr,'measured');
 
 % Play original sound
 sound=audioplayer(txsignal,fsample);
@@ -78,14 +78,14 @@ end
 % Zeroforcing equalizer impulse response
 heq = ifft(Heq);
 subplot(2,2,3);
-x = linspace(0,max(a(:,1)),length(heq)); % TODO: how should this time axis be??
+x = linspace(0,max(a(:,1)),length(heq));
 plot(x,heq,'-');
 title('Equalizer impulse response')
 xlabel('Time (s)')
 ylabel('Amplitude')
 
 yeq = conv(ych,heq,'same');
-yeq = yeq./max(yeq);
+
 x = yeq;
 pause;
 

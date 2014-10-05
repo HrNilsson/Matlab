@@ -8,7 +8,7 @@ function [x] = ADWI_Channel(txsignal,fsample,bitspersample)
 %   x : Channel output.
 %
 
-%x = Ex1_Channel1(txsignal,fsample,bitspersample);
+% x = Ex1_Channel1(txsignal,fsample,bitspersample);
 % x = Ex1_Channel2_2(txsignal,fsample,bitspersample);
 % x = Ex1_Channel3(txsignal,fsample,bitspersample);
 x = Ex2_Channel1_Rene(txsignal,fsample,bitspersample);
